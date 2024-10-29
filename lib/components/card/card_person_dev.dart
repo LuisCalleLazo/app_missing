@@ -15,7 +15,7 @@ class CardPersonDev extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         elevation: 5,
         child: Container(
-          height: 300,
+          height: 350,
           color: Colors.transparent,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -23,6 +23,7 @@ class CardPersonDev extends StatelessWidget {
               _FieldView(
                 fieldName: "Jose Miguel Quispe",
                 value: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 30),
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(
