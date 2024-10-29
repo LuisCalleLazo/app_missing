@@ -1,4 +1,5 @@
 import 'package:app_missing/config/router/app_router.dart';
+import 'package:app_missing/config/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'MisPeo',
-      // theme: AppTheme().getTheme(),
+      theme: AppTheme().getTheme(),
       routerConfig: appRouter,
     );
   }

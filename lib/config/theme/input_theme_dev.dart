@@ -7,20 +7,26 @@ class InputThemeDev {
       hoverColor: colorOutline,
       focusColor: colorOutline,
       iconColor: colorOutline,
-      fillColor: Colors.amber[100],
+      contentPadding: const EdgeInsets.symmetric(vertical: 12),
       border: const OutlineInputBorder(),
-      labelStyle: TextStyle(
-        backgroundColor: Colors.white,
-        color: colorOutline,
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-        decorationColor: Colors.amber,
+      enabledBorder: UnderlineInputBorder(
+        borderSide: const BorderSide(color: Colors.blueGrey, width: 2.0),
+        borderRadius: BorderRadius.circular(0.0),
       ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: colorOutline,
-          width: 3,
-        ),
+      focusedBorder: UnderlineInputBorder(
+        borderSide: const BorderSide(color: Colors.blue, width: 3.0),
+        borderRadius: BorderRadius.circular(0.0),
+      ),
+      errorBorder: UnderlineInputBorder(
+        borderSide: const BorderSide(color: Colors.red, width: 2.0),
+        borderRadius: BorderRadius.circular(0.0),
+      ),
+      hintStyle: const TextStyle(color: Colors.grey),
+      labelStyle: TextStyle(
+        color: colorOutline,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        decorationColor: Colors.blue[500],
       ),
     );
   }

@@ -15,7 +15,7 @@ class BtnTextDev extends StatelessWidget {
       color: const Color.fromRGBO(0, 0, 0, 0),
       child: ElevatedButton(
         style: const ButtonStyle(
-          backgroundColor: WidgetStatePropertyAll(Colors.amber),
+          backgroundColor: WidgetStatePropertyAll(Colors.blue),
         ),
         onPressed: onPressed,
         child: Container(

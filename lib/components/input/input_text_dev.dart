@@ -14,13 +14,14 @@ class InputTextDev extends StatelessWidget {
       padding: const EdgeInsetsDirectional.symmetric(vertical: 1.0, horizontal: 20.0),
       child: TextField(
         style: const TextStyle(
-          color: Colors.amber,
+          color: Colors.blue,
           fontSize: 20,
         ),
-        cursorColor: const Color.fromRGBO(255, 179, 0, 1),
+        cursorColor: const Color.fromRGBO(55, 179, 200, 1),
         decoration: InputDecoration(
           icon: const Icon(Icons.email),
           label: Text(label),
+          iconColor: Colors.blue
         ),
       ),
     );
