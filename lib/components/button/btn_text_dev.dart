@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 
 class BtnTextDev extends StatelessWidget {
   final String text;
+  final double? width;
+  final double? fontSize;
   final void Function()? onPressed;
   const BtnTextDev({
     super.key,
     required this.text,
     required this.onPressed,
+    this.width, this.fontSize
   });
 
   @override
@@ -20,12 +23,12 @@ class BtnTextDev extends StatelessWidget {
         onPressed: onPressed,
         child: Container(
           padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
-          width: 350,
+          width: width ?? 350,
           alignment: Alignment.center,
           child: Text(
             text,
-            style: const TextStyle(
-                fontSize: 25,
+            style: TextStyle(
+                fontSize: fontSize ?? 25,
                 fontFamily: "",
                 color: Colors.white,
                 fontWeight: FontWeight.bold),

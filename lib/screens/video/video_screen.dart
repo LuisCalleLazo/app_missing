@@ -1,4 +1,5 @@
 import 'package:app_missing/components/card/card_notification_dev.dart';
+import 'package:app_missing/components/card/card_video_dev.dart';
 import 'package:flutter/material.dart';
 
 const cards = <Map<String, dynamic>>[
@@ -30,7 +31,7 @@ class VideoScreen extends StatelessWidget {
       body: ListView.builder(
         itemCount: cards.length,
         itemBuilder: (context, index) {
-          return const CardNotificationDev();
+          return const CardVideoDev();
         },
       ),
     );

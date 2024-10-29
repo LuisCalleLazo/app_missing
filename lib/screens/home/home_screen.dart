@@ -1,4 +1,5 @@
 import 'package:app_missing/components/card/card_notification_dev.dart';
+import 'package:app_missing/components/card/card_publication_dev.dart';
 import 'package:app_missing/components/input/input_search_dev.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class HomeScreen extends StatelessWidget {
       body: ListView.builder(
         itemCount: cards.length,
         itemBuilder: (context, index) {
-          return const CardNotificationDev();
+          return const CardPublicationDev();
         },
       ),
     );
