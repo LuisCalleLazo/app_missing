@@ -20,7 +20,7 @@ class CardPersonDev extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _FieldView(
+              FieldView(
                 fieldName: "Jose Miguel Quispe",
                 value: Container(
                   padding: const EdgeInsets.symmetric(vertical: 30),
@@ -33,21 +33,21 @@ class CardPersonDev extends StatelessWidget {
                   ),
                 ),
               ),
-              const _FieldView(
+              const FieldView(
                 fieldName: "Fecha de nacimiento",
                 value: Padding(
                   padding: EdgeInsets.only(right: 30),
                   child: Text("2003 / 09 / 25"),
                 ),
               ),
-              const _FieldView(
+              const FieldView(
                 fieldName: "Fecha de desaparición",
                 value: Padding(
                   padding: EdgeInsets.only(right: 30),
                   child: Text("2003 / 11 / 09"),
                 ),
               ),
-              _FieldView(
+              FieldView(
                 fieldName: "Ultima ubicación",
                 value: BtnTextDev(
                   text: "Google Maps",
@@ -56,14 +56,14 @@ class CardPersonDev extends StatelessWidget {
                   fontSize: 17,
                 ),
               ),
-              const _FieldView(
+              const FieldView(
                 fieldName: "Tamaño",
                 value: Padding(
                   padding: EdgeInsets.only(right: 30),
                   child: Text("1,87 [m]"),
                 ),
               ),
-              const _FieldView(
+              const FieldView(
                 fieldName: "Sexo",
                 value: Padding(
                   padding: EdgeInsets.only(right: 30),
@@ -78,10 +78,10 @@ class CardPersonDev extends StatelessWidget {
   }
 }
 
-class _FieldView extends StatelessWidget {
+class FieldView extends StatelessWidget {
   final String fieldName;
   final Widget value;
-  const _FieldView({
+  const FieldView({
     required this.fieldName,
     required this.value,
   });

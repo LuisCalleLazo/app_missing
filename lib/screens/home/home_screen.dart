@@ -1,6 +1,5 @@
-import 'package:app_missing/components/card/card_notification_dev.dart';
+
 import 'package:app_missing/components/card/card_publication_dev.dart';
-import 'package:app_missing/components/input/input_search_dev.dart';
 import 'package:flutter/material.dart';
 
 const cards = <Map<String, dynamic>>[
