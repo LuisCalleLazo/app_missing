@@ -18,32 +18,12 @@ class InputSearchDev extends StatelessWidget {
             height: 1.3,
             fontSize: 21,
           ),
-          cursorColor: const Color.fromRGBO(255, 179, 0, 1),
           decoration: InputDecoration(
             suffixIcon: IconButton(
               onPressed: () {},
               icon: const Icon(Icons.search),
               iconSize: 30,
             ),
-            border: const UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.amber,
-                width: 2.0,
-              ),
-            ),
-            enabledBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.amber,
-                width: 2.0, // Ajusta el grosor del borde inferior
-              ),
-            ),
-            focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: Colors.amber,
-                width: 2.0, // Ajusta el grosor del borde inferior
-              ),
-            ),
-            contentPadding: const EdgeInsets.only(left: 20.0, top: 10.0),
           ),
         ),
       ),

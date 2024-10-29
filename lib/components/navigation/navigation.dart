@@ -11,8 +11,8 @@ class Navigation extends StatelessWidget {
     return BottomNavigationBar(
       type: BottomNavigationBarType.shifting,
       backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-      unselectedItemColor: Colors.amber,
-      selectedItemColor: Colors.amber[800],
+      unselectedItemColor: Colors.blueGrey,
+      selectedItemColor: Colors.blueAccent,
       items: <BottomNavigationBarItem>[
         const BottomNavigationBarItem(
           icon: Icon(Icons.home),
