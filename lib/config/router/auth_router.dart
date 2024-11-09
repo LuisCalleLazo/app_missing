@@ -1,4 +1,4 @@
-import 'package:app_missing/pages/auth/login_page.dart';
+import 'package:app_missing/presentation/pages/auth/login_page.dart';
 import 'package:go_router/go_router.dart';
 
 const String pathBase = "/auth";
