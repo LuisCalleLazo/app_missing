@@ -2,7 +2,6 @@
 class UserInfo {
   final String name;
   final String email;
-  final String photo;
   final String firstName;
   final String dadLastName;
   final String momLastName;
@@ -13,7 +12,6 @@ class UserInfo {
   UserInfo({
     required this.name,
     required this.email,
-    required this.photo,
     required this.firstName,
     required this.dadLastName,
     required this.momLastName,
@@ -30,7 +28,6 @@ class UserResponse extends UserInfo {
     required this.id,
     required String name,
     required String email,
-    required String photo,
     required String firstName,
     required String dadLastName,
     required String momLastName,
@@ -40,7 +37,6 @@ class UserResponse extends UserInfo {
   }) : super(
           name: '',
           email: '',
-          photo: '',
           firstName: '',
           dadLastName: '',
           momLastName: '',
