@@ -7,7 +7,7 @@ class MissingProvider extends ChangeNotifier {
   final MissingRepositoryImpl missingRepo =
       MissingRepositoryImpl(MissingDatasourceImpl());
   List<MissingDetail> _missingDetails = [];
-  bool _isLoading = false;
+  bool _isLoading = true;
   List<MissingDetail> get missingDetails => _missingDetails;
   bool get isLoading => _isLoading;
 

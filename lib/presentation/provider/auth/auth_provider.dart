@@ -22,7 +22,6 @@ class AuthProvider extends ChangeNotifier {
         await authRepository.login(nameOremail, password, context);
     // Almacenar el token
     const storage = FlutterSecureStorage();
-    print("Token añadido otra ves: ${loginResponse.currentToken}");
     await storage.write(key: StorageKey.getCurrentToken(), value: loginResponse.currentToken);
     await storage.write(key: StorageKey.getRefreshToken(), value: loginResponse.refreshToken);
     await storage.write(key: StorageKey.getUser(), value: jsonEncode((loginResponse.user).toJson()));
