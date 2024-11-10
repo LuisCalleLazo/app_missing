@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class InputPassDev extends StatefulWidget {
-  const InputPassDev({super.key});
+  final TextEditingController controller;
+  const InputPassDev({
+    super.key,
+    required this.controller,
+  });
 
   @override
   State<InputPassDev> createState() => _InputPassDevState();
@@ -15,13 +19,13 @@ class _InputPassDevState extends State<InputPassDev> {
       _obscureText = !_obscureText;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.symmetric(
           vertical: 1.0, horizontal: 20.0),
       child: TextField(
+        controller: widget.controller,
         style: const TextStyle(
           color: Colors.blue,
           fontSize: 20,

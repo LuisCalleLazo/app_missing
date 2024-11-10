@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class InputTextDev extends StatelessWidget {
   final String label;
+  final TextEditingController controller;
 
   const InputTextDev({
     super.key,
     required this.label,
+    required this.controller,
   });
 
   @override
@@ -13,6 +15,7 @@ class InputTextDev extends StatelessWidget {
     return Padding(
       padding: const EdgeInsetsDirectional.symmetric(vertical: 1.0, horizontal: 20.0),
       child: TextField(
+        controller: controller,
         style: const TextStyle(
           color: Colors.blue,
           fontSize: 20,

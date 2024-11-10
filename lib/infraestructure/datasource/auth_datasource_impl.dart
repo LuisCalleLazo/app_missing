@@ -16,6 +16,16 @@ class AuthDataSourceImpl extends AuthDatasource {
   }
 
   @override
+  Future<Response> refreshToken(String tokenExpired,String refreshToken) async {
+    final response = await _client.post('api/v1/auth/refreshToken', data: {
+      'refreshToken': refreshToken,
+      'tokenExpired': tokenExpired
+    });
+
+    return response;
+  }
+
+  @override
   Future<AuthResponseModel> register(
       String nameOrGamil, String password) async {
     final response = await _client.post('/register', data: {

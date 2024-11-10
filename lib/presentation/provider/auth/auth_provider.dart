@@ -19,6 +19,21 @@ class AuthProvider extends ChangeNotifier {
     context.push('/home');
   }
 
+  Future<void> refreshAuthToken() async {
+    if (_current != null) {
+      // final response = await _client.post('/api/v1/auth/refresh', data: {
+      //   'refreshToken': _authResponse!.refreshToken,
+      // });
+
+      // if (response.statusCode == 200) {
+        // _current!.currentToken = response.data['currentToken'];
+        notifyListeners();
+      // } else {
+        // Manejo de errores
+      // }
+    }
+  }
+
   Future<void> register(String nameOremail, String password) async {
     _current = await authRepository.register(nameOremail, password);
     notifyListeners();
