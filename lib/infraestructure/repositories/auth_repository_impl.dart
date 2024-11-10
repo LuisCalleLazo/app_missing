@@ -12,10 +12,10 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this.dataSource);
 
   @override
-  Future<AuthResponse> login(String email, String password, BuildContext context) async {
+  Future<AuthResponse> login(
+      String email, String password, BuildContext context) async {
     final errorHandler = ApiErrorHandler(context);
-    try
-    {
+    try {
       final response = await dataSource.login(email, password);
       // Verificar si la respuesta tiene los datos correctos
       errorHandler.handleResponse(
@@ -23,9 +23,9 @@ class AuthRepositoryImpl implements AuthRepository {
         showSuccessSnackbar: true,
         successMessage: "Inicio de sesión exitoso",
       );
-      return AuthResponseModel.fromJson(response.data);
-      
-    }on DioException catch (e) {
+      final red = AuthResponseModel.fromJson(response.data);
+      return red;
+    } on DioException catch (e) {
       errorHandler.handleError(error: e);
       throw Exception(e);
     }

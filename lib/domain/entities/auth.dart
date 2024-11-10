@@ -10,4 +10,5 @@ class AuthResponse {
     required this.currentToken,
     required this.refreshToken,
   });
+  
 }

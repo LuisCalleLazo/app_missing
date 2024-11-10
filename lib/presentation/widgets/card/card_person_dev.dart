@@ -1,12 +1,19 @@
+import 'package:app_missing/domain/entities/missing.dart';
 import 'package:app_missing/presentation/widgets/button/btn_text_dev.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CardPersonDev extends StatelessWidget {
-  const CardPersonDev({super.key});
+  final MissingDetail data;
+  const CardPersonDev({
+    super.key,
+    required this.data,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final birthDate = data.birthDate;
+    final missgDate = data.missingDate;
     return InkWell(
       onTap: () {
         context.push("/notification");
@@ -21,7 +28,7 @@ class CardPersonDev extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FieldView(
-                fieldName: "Jose Miguel Quispe",
+                fieldName: data.fullName,
                 value: Container(
                   padding: const EdgeInsets.symmetric(vertical: 30),
                   decoration: const BoxDecoration(
@@ -33,18 +40,20 @@ class CardPersonDev extends StatelessWidget {
                   ),
                 ),
               ),
-              const FieldView(
+              FieldView(
                 fieldName: "Fecha de nacimiento",
                 value: Padding(
-                  padding: EdgeInsets.only(right: 30),
-                  child: Text("2003 / 09 / 25"),
+                  padding: const EdgeInsets.only(right: 30),
+                  child: Text(
+                      '${birthDate.year} / ${birthDate.month} / ${birthDate.day}'),
                 ),
               ),
-              const FieldView(
+              FieldView(
                 fieldName: "Fecha de desaparición",
                 value: Padding(
-                  padding: EdgeInsets.only(right: 30),
-                  child: Text("2003 / 11 / 09"),
+                  padding: const EdgeInsets.only(right: 30),
+                  child: Text(
+                      '${missgDate.year} / ${missgDate.month} / ${missgDate.day}'),
                 ),
               ),
               FieldView(
@@ -56,18 +65,18 @@ class CardPersonDev extends StatelessWidget {
                   fontSize: 17,
                 ),
               ),
-              const FieldView(
+              FieldView(
                 fieldName: "Tamaño",
                 value: Padding(
-                  padding: EdgeInsets.only(right: 30),
-                  child: Text("1,87 [m]"),
+                  padding: const EdgeInsets.only(right: 30),
+                  child: Text("${data.size} [m]"),
                 ),
               ),
-              const FieldView(
+              FieldView(
                 fieldName: "Sexo",
                 value: Padding(
-                  padding: EdgeInsets.only(right: 30),
-                  child: Text("Hombre"),
+                  padding: const EdgeInsets.only(right: 30),
+                  child: Text(data.gender ? "Hombre" : "Mujer"),
                 ),
               ),
             ],

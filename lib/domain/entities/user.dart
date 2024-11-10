@@ -1,4 +1,3 @@
-
 class UserInfo {
   final String name;
   final String email;
@@ -23,25 +22,30 @@ class UserInfo {
 
 class UserResponse extends UserInfo {
   final int id;
-  
+
   UserResponse({
     required this.id,
-    required String name,
-    required String email,
-    required String firstName,
-    required String dadLastName,
-    required String momLastName,
-    required int age,
-    required String city,
-    required String ci,
-  }) : super(
-          name: '',
-          email: '',
-          firstName: '',
-          dadLastName: '',
-          momLastName: '',
-          age: 0,
-          city: '',
-          ci: '',
-        );
+    required super.name,
+    required super.email,
+    required super.firstName,
+    required super.dadLastName,
+    required super.momLastName,
+    required super.age,
+    required super.city,
+    required super.ci,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'email' : email,
+      'firstName': firstName,
+      'dadLastName': dadLastName,
+      'momLastName': momLastName,
+      'age': age,
+      'city' : city,
+      'ci' : ci
+    };
+  }
 }

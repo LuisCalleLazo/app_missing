@@ -1,20 +1,19 @@
 import 'user_response_mode.dart';
 import '../../../domain/entities/auth.dart';
-import '../../../domain/entities/user.dart';
 import 'package:app_missing/shared/constants/default_value.dart';
 
 class AuthResponseModel extends AuthResponse {
   AuthResponseModel({
-    required UserResponse user,
-    required String currentToken,
-    required String refreshToken,
-  }) : super(currentToken: '', refreshToken: '', user: defaultUserResponse);
+    required super.user,
+    required super.currentToken,
+    required super.refreshToken,
+  });
 
   factory AuthResponseModel.fromJson(Map<String, dynamic> json) {
     return AuthResponseModel(
-      user: UserResponseModel.fromJson(json['user']),
-      currentToken: json['currentToken'],
-      refreshToken: json['refreshToken'],
+      user: json['user'] != null ? UserResponseModel.fromJson(json['user']) : defaultUserResponse,
+      currentToken: json['currentToken'] ?? '',
+      refreshToken: json['refreshToken'] ?? '',
     );
   }
 
