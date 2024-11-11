@@ -8,6 +8,9 @@ class MissingDetail {
   final String description;
   final String lastSeenMap;
   final bool found;
+  final bool photosFront;
+  final bool photosLeft;
+  final bool photosRigth;
 
   MissingDetail({
     required this.id,
@@ -18,6 +21,9 @@ class MissingDetail {
     required this.gender,
     required this.description,
     required this.lastSeenMap,
-    required this.found
+    required this.found,
+    required this.photosFront,
+    required this.photosLeft,
+    required this.photosRigth
   });
 }

@@ -1,6 +1,8 @@
 import 'package:app_missing/presentation/provider/missing/missing_provider.dart';
+import 'package:app_missing/presentation/widgets/button/btn_float_dev.dart';
 import 'package:app_missing/presentation/widgets/card/card_person_dev.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -19,7 +21,7 @@ class _MissingScreenState extends State<MissingScreen> {
         Provider.of<MissingProvider>(context, listen: false);
     if (!_isDataLoaded &&
         missingProvider.missingDetails.isEmpty &&
-        !missingProvider.isLoading) {
+        missingProvider.isLoading) {
       missingProvider.listDetail(context);
       setState(() {
         _isDataLoaded = true;
@@ -37,23 +39,31 @@ class _MissingScreenState extends State<MissingScreen> {
         }
       },
       child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Personas desaparecidas"),
-            automaticallyImplyLeading: false,
-          ),
-          body: Consumer<MissingProvider>(
-            builder: (context, missingProvider, child) {
-              return missingProvider.isLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : ListView.builder(
-                      itemCount: missingProvider.missingDetails.length,
-                      itemBuilder: (context, index) {
-                        final detail = missingProvider.missingDetails[index];
-                        return CardPersonDev(data: detail);
-                      },
-                    );
-            },
-          )),
+        appBar: AppBar(
+          title: const Text("Personas desaparecidas"),
+          automaticallyImplyLeading: false,
+        ),
+        body: Consumer<MissingProvider>(
+          builder: (context, missingProvider, child) {
+            return missingProvider.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    itemCount: missingProvider.missingDetails.length,
+                    itemBuilder: (context, index) {
+                      final detail = missingProvider.missingDetails[index];
+                      return CardPersonDev(data: detail);
+                    },
+                  );
+          },
+        ),
+        floatingActionButton: BtnFloatDev(
+          icon: Icons.add,
+          text: "Agregar persona",
+          onPressed: () {
+            context.push('/missing/detail');
+          },
+        ),
+      ),
     );
   }
 }

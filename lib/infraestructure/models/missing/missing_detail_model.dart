@@ -11,6 +11,9 @@ class MissingDetailModel extends MissingDetail {
   required super.description,
   required super.lastSeenMap,
   required super.found,
+  required super.photosFront,
+  required super.photosLeft,
+  required super.photosRigth
   });
 
   factory MissingDetailModel.fromJson(Map<String, dynamic> json) {
@@ -24,6 +27,9 @@ class MissingDetailModel extends MissingDetail {
       description: json['description'] ?? '',
       lastSeenMap: json['lastSeenMap'] ?? '',
       found: json['found'] ?? false,
+      photosFront: json['photosFront'] ?? false,
+      photosLeft: json['photosLeft'] ?? false,
+      photosRigth: json['photosRigth'] ?? false,
     );
   }
 
@@ -38,6 +44,9 @@ class MissingDetailModel extends MissingDetail {
       'description' : description,
       'lastSeenMap' : lastSeenMap,
       'found' : found,
+      'photosFront' : photosFront,
+      'photosLeft' : photosLeft,
+      'photosRigth' : photosRigth,
     };
   }
 }

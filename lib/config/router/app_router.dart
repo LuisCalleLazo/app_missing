@@ -1,5 +1,6 @@
 import 'package:app_missing/config/router/auth_router.dart';
 import 'package:app_missing/config/router/home_router.dart';
+import 'package:app_missing/config/router/missing_route.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
@@ -7,5 +8,6 @@ final appRouter = GoRouter(
   routes: [
     ...authRoutes,
     ...homeRoutes,
+    ...missingRoutes,
   ],
 );

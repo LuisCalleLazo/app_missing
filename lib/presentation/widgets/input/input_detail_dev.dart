@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-class InputTextDev extends StatelessWidget {
+class InputDetailDev extends StatelessWidget {
   final String label;
   final TextEditingController controller;
-
-  const InputTextDev({
+  const InputDetailDev({
     super.key,
     required this.label,
     required this.controller,
@@ -14,20 +13,23 @@ class InputTextDev extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.symmetric(
-        vertical: 1.0,
+        vertical: 10.0,
         horizontal: 20.0,
       ),
       child: TextField(
         controller: controller,
         style: const TextStyle(
           color: Colors.blue,
-          fontSize: 20,
+          fontSize: 16,
         ),
+        maxLines: 5,
         cursorColor: const Color.fromRGBO(55, 179, 200, 1),
         decoration: InputDecoration(
-            icon: const Icon(Icons.email),
-            label: Text(label),
-            iconColor: Colors.blue),
+          icon: const Icon(Icons.email),
+          labelText: label,
+          alignLabelWithHint: true,
+          border: const OutlineInputBorder(),
+        ),
       ),
     );
   }

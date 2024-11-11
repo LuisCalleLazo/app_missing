@@ -12,8 +12,6 @@ class MissingProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   Future<void> listDetail(BuildContext context) async {
-    _isLoading = true;
-    notifyListeners();
     _missingDetails = await missingRepo.listMissingDetail(context);
     _isLoading = false;
     notifyListeners();
