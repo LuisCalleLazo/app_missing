@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 class Navigation extends StatelessWidget {
   final ValueChanged<int> onItemTapped;
   final int selectedIndex;
-  const Navigation(
-      {super.key, required this.onItemTapped, required this.selectedIndex});
+  final int notificationCount;
+  const Navigation({
+    super.key,
+    required this.onItemTapped,
+    required this.selectedIndex,
+    required this.notificationCount,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +45,10 @@ class Navigation extends StatelessWidget {
                     minHeight: 15,
                     minWidth: 15,
                   ),
-                  child: const Text(
-                    "7",
+                  child: Text(
+                    "$notificationCount",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 8,
                     ),

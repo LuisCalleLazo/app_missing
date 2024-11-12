@@ -1,8 +1,10 @@
+import 'package:app_missing/domain/entities/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CardNotificationDev extends StatelessWidget {
-  const CardNotificationDev({super.key});
+  final NotificationEnt notification;
+  const CardNotificationDev({super.key, required this.notification});
 
   @override
   Widget build(BuildContext context) {

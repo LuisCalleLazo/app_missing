@@ -1,39 +1,40 @@
+import 'package:app_missing/domain/entities/notification.dart';
+import 'package:app_missing/infraestructure/repositories/notification_repository_impl.dart';
+import 'package:app_missing/presentation/provider/missing/notification_provider.dart';
 import 'package:app_missing/presentation/widgets/card/card_notification_dev.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-const cards = <Map<String, dynamic>>[
-  {'elevation': 0.0, 'label': 'Elevation 0'},
-  {'elevation': 1.0, 'label': 'Elevation 1'},
-  {'elevation': 2.0, 'label': 'Elevation 2'},
-  {'elevation': 3.0, 'label': 'Elevation 3'},
-  {'elevation': 4.0, 'label': 'Elevation 4'},
-  {'elevation': 5.0, 'label': 'Elevation 5'},
-  {'elevation': 0.0, 'label': 'Elevation 0'},
-  {'elevation': 1.0, 'label': 'Elevation 1'},
-  {'elevation': 2.0, 'label': 'Elevation 2'},
-  {'elevation': 3.0, 'label': 'Elevation 3'},
-  {'elevation': 4.0, 'label': 'Elevation 4'},
-  {'elevation': 5.0, 'label': 'Elevation 5'},
-  {'elevation': 0.0, 'label': 'Elevation 0'},
-  {'elevation': 1.0, 'label': 'Elevation 1'},
-];
-
-class NotificationScreen extends StatelessWidget {
+class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});
 
   @override
+  State<NotificationScreen> createState() => _NotificationScreenState();
+}
+
+class _NotificationScreenState extends State<NotificationScreen> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Notificaciones"),
-        automaticallyImplyLeading: false,
-      ),
-      body: ListView.builder(
-        itemCount: cards.length,
-        itemBuilder: (context, index) {
-          return const CardNotificationDev();
-        },
-      ),
-    );
+    return Consumer<NotificationRepositoryImpl>(
+        builder: (context, notificationRepo, child) {
+      List<NotificationEnt> notifications =
+          NotificationProvider().notifications;
+
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(
+              'Notifications (${NotificationProvider().notificationCount})'), // Mostrar el conteo
+        ),
+        body: notifications.isEmpty
+            ? const Center(child: Text("No new notifications."))
+            : ListView.builder(
+                itemCount: notifications.length,
+                itemBuilder: (context, index) {
+                  NotificationEnt notification = notifications[index];
+                  return CardNotificationDev(notification: notification);
+                },
+              ),
+      );
+    });
   }
 }

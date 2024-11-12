@@ -1,3 +1,4 @@
+import 'package:app_missing/presentation/provider/missing/notification_provider.dart';
 import 'package:app_missing/presentation/widgets/navigation/navigation.dart';
 import 'package:app_missing/presentation/screens/home/home_screen.dart';
 import 'package:app_missing/presentation/screens/missing/missing_screen.dart';
@@ -30,6 +31,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    int count = NotificationProvider().notificationCount;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -47,6 +49,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: Navigation(
         onItemTapped: _onItemTapped,
         selectedIndex: _selectedIndex,
+        notificationCount: count
       ),
     );
   }
