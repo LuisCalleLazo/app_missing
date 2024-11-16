@@ -3,7 +3,6 @@ import 'package:app_missing/presentation/pages/missing/missing_photos_page.dart'
 import 'package:app_missing/shared/constants/storage_value.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
-import 'package:app_missing/shared/constants/default_value.dart';
 
 const String pathBase = "/missing";
 
@@ -11,10 +10,7 @@ final List<GoRoute> missingRoutes = [
   GoRoute(
     path: '$pathBase/detail',
     name: MissingDetailPage.name,
-    builder: (context, state) => MissingDetailPage(
-      detail: defaultMissingDetail,
-      create: true,
-    ),
+    builder: (context, state) => const MissingDetailPage(),
     redirect: (context, state) {
       const storage = FlutterSecureStorage();
       final token = storage.read(key: StorageKey.getCurrentToken());

@@ -1,7 +1,9 @@
 import 'package:app_missing/domain/entities/missing.dart';
+import 'package:app_missing/presentation/provider/missing/missing_provider.dart';
 import 'package:app_missing/presentation/widgets/button/btn_text_dev.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class CardPersonDev extends StatelessWidget {
   final MissingDetail data;
@@ -12,11 +14,13 @@ class CardPersonDev extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final missingProvider = Provider.of<MissingProvider>(context);
     final birthDate = data.birthDate;
     final missgDate = data.missingDate;
     return InkWell(
       onTap: () {
-        context.push("/notification");
+        missingProvider.setSelectMissing(data);
+        context.push("/missing/detail");
       },
       child: Card(
         clipBehavior: Clip.hardEdge,

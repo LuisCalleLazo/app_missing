@@ -28,9 +28,10 @@ class AuthProvider extends ChangeNotifier {
 
     _current = loginResponse;
     notifyListeners();
-
+    
     // ignore: use_build_context_synchronously
     context.push('/home');
+
   }
 
   Future<void> refreshAuthToken() async {

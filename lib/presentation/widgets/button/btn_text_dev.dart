@@ -4,12 +4,15 @@ class BtnTextDev extends StatelessWidget {
   final String text;
   final double? width;
   final double? fontSize;
+  final Color color;
   final void Function()? onPressed;
   const BtnTextDev({
     super.key,
     required this.text,
     required this.onPressed,
-    this.width, this.fontSize
+    this.width,
+    this.fontSize,
+    this.color = Colors.blue,
   });
 
   @override
@@ -17,8 +20,13 @@ class BtnTextDev extends StatelessWidget {
     return Container(
       color: const Color.fromRGBO(0, 0, 0, 0),
       child: ElevatedButton(
-        style: const ButtonStyle(
-          backgroundColor: WidgetStatePropertyAll(Colors.blue),
+        style: ButtonStyle(
+          backgroundColor: WidgetStatePropertyAll(color),
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
         ),
         onPressed: onPressed,
         child: Container(
@@ -28,10 +36,11 @@ class BtnTextDev extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-                fontSize: fontSize ?? 25,
-                fontFamily: "",
-                color: Colors.white,
-                fontWeight: FontWeight.bold),
+              fontSize: fontSize ?? 25,
+              fontFamily: "",
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

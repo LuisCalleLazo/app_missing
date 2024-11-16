@@ -9,7 +9,7 @@ class NotificationDatasourceImpl extends NotificationDatasource
 
   @override
   void connect(String token) {
-    final uri = Uri.parse("ws://localhost:5000/socket?token=$token");
+    final uri = Uri.parse("ws://192.168.0.9:5000/api/v1/notification/socket?token=$token");
     _channel = IOWebSocketChannel.connect(uri);
 
     // Escuchar mensajes

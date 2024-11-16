@@ -1,6 +1,7 @@
 import 'package:app_missing/presentation/provider/missing/missing_provider.dart';
 import 'package:app_missing/presentation/widgets/button/btn_float_dev.dart';
 import 'package:app_missing/presentation/widgets/card/card_person_dev.dart';
+import 'package:app_missing/shared/constants/default_value.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +32,8 @@ class _MissingScreenState extends State<MissingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final missingProvider =
+        Provider.of<MissingProvider>(context, listen: false);
     return VisibilityDetector(
       key: const Key("MissingScreen"),
       onVisibilityChanged: (visibilityInfo) {
@@ -60,6 +63,7 @@ class _MissingScreenState extends State<MissingScreen> {
           icon: Icons.add,
           text: "Agregar persona",
           onPressed: () {
+            missingProvider.setSelectMissing(defaultMissingDetail);
             context.push('/missing/detail');
           },
         ),

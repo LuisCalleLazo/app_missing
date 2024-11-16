@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 
 class InputDateDev extends StatefulWidget {
   final String label;
+  final ValueNotifier<int?> dropdownDay;
+  final ValueNotifier<String?> dropdownMonth;
+  final ValueNotifier<int?> dropdownYear;
   const InputDateDev({
     super.key,
     required this.label,
+    required this.dropdownDay,
+    required this.dropdownMonth,
+    required this.dropdownYear,
   });
 
   @override
@@ -12,8 +18,10 @@ class InputDateDev extends StatefulWidget {
 }
 
 class _InputDateDevState extends State<InputDateDev> {
+  // Maximos valores de tamaño de field
   final double maxHeigth = 400;
   final double itemHeigth = 50;
+
   // Listas para los valores de días, meses y años
   final List<int> days = List.generate(31, (index) => index + 1);
   final List<String> months = [
@@ -47,12 +55,12 @@ class _InputDateDevState extends State<InputDateDev> {
             children: [
               const Icon(Icons.date_range),
               Padding(
-                padding: const EdgeInsets.only(left: 20, bottom: 30),
+                padding: const EdgeInsets.only(left: 20, bottom: 10),
                 child: Text(
                   widget.label,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.blue[500],
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.blue,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -69,9 +77,12 @@ class _InputDateDevState extends State<InputDateDev> {
                 hint: const Text("Día"),
                 value: selectedDay,
                 onChanged: (value) {
-                  setState(() {
-                    selectedDay = value;
-                  });
+                  setState(
+                    () {
+                      selectedDay = value;
+                      widget.dropdownDay.value = value;
+                    },
+                  );
                 },
                 items: days.map((day) {
                   return DropdownMenuItem<int>(
@@ -87,16 +98,21 @@ class _InputDateDevState extends State<InputDateDev> {
                 hint: const Text("Mes"),
                 value: selectedMonth,
                 onChanged: (value) {
-                  setState(() {
-                    selectedMonth = value;
-                  });
-                },
-                items: months.map((month) {
-                  return DropdownMenuItem<String>(
-                    value: month,
-                    child: Text(month),
+                  setState(
+                    () {
+                      selectedMonth = value;
+                      widget.dropdownMonth.value = value;
+                    },
                   );
-                }).toList(),
+                },
+                items: months.map(
+                  (month) {
+                    return DropdownMenuItem<String>(
+                      value: month,
+                      child: Text(month),
+                    );
+                  },
+                ).toList(),
               ),
               // Año
               DropdownButton<int>(
@@ -105,16 +121,21 @@ class _InputDateDevState extends State<InputDateDev> {
                 hint: const Text("Año"),
                 value: selectedYear,
                 onChanged: (value) {
-                  setState(() {
-                    selectedYear = value;
-                  });
-                },
-                items: years.map((year) {
-                  return DropdownMenuItem<int>(
-                    value: year,
-                    child: Text(year.toString()),
+                  setState(
+                    () {
+                      selectedYear = value;
+                      widget.dropdownYear.value = value;
+                    },
                   );
-                }).toList(),
+                },
+                items: years.map(
+                  (year) {
+                    return DropdownMenuItem<int>(
+                      value: year,
+                      child: Text(year.toString()),
+                    );
+                  },
+                ).toList(),
               ),
             ],
           ),
