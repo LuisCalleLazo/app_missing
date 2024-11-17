@@ -24,7 +24,42 @@ class CardPersonDev extends StatelessWidget {
     return InkWell(
       onTap: () {
         missingProvider.setSelectMissing(data);
+        missingProvider.setForCreate(false);
         context.push("/missing/detail");
+      },
+      onLongPress: () {
+        // Mostrar un diálogo al mantener presionado
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("¿Deseas eliminar el usuario '${data.fullName}'?"),
+              content: const Text("Se eliminara todo, incluyendo su busqueda."),
+              actions: [
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Eliminar",
+                    style: TextStyle(
+                      color: Colors.blue[500],
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    context.pop(); // Cierra el diálogo
+                  },
+                  child: Text(
+                    "Cancelar",
+                    style: TextStyle(
+                      color: Colors.blue[700],
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
       },
       child: Card(
         clipBehavior: Clip.hardEdge,

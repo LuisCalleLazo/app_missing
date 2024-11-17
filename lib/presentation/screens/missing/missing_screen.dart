@@ -76,6 +76,7 @@ class _MissingScreenState extends State<MissingScreen> {
           text: "Agregar persona",
           onPressed: () {
             missingProvider.setSelectMissing(defaultMissingDetail);
+            missingProvider.setForCreate(true);
             context.push('/missing/detail');
           },
         ),

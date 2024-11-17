@@ -1,3 +1,4 @@
+import 'package:app_missing/domain/entities/missing.dart';
 import 'package:app_missing/presentation/provider/missing/missing_provider.dart';
 import 'package:app_missing/presentation/services/input_controller_manager.dart';
 import 'package:app_missing/presentation/services/value_notifier_manager.dart';
@@ -25,6 +26,47 @@ class MissingDetailPage extends StatefulWidget {
 
 class _MissingDetailPageState extends State<MissingDetailPage> {
   final InputControllerManager _inputManager = InputControllerManager();
+  late MissingProvider missingProvider;
+  late bool stateAddPhoto;
+
+  @override
+  void initState() {
+    super.initState();
+    stateAddPhoto = false;
+    missingProvider = Provider.of<MissingProvider>(context, listen: false);
+    _initializeValues();
+  }
+
+  void _initializeValues() {
+    // Aquí puedes establecer los valores iniciales
+    DateTime birthDate = missingProvider.selectMissing.birthDate;
+    DateTime missingDate = missingProvider.selectMissing.missingDate;
+
+    if ((birthDate.day != missingDate.day) ||
+        (birthDate.month != missingDate.month) ||
+        (birthDate.year != missingDate.year)) {
+      // Establece los valores en valueManager
+      valueManagerInt.setNotifierValue('date_day_birth', birthDate.day);
+      valueManagerString.setNotifierValue(
+          'date_month_birth', monthsDefault[birthDate.month - 1]);
+      valueManagerInt.setNotifierValue('date_year_birth', birthDate.year);
+      valueManagerInt.setNotifierValue('date_day_last', missingDate.day);
+      valueManagerString.setNotifierValue(
+          'date_month_last', monthsDefault[missingDate.month - 1]);
+      valueManagerInt.setNotifierValue('date_year_last', missingDate.year);
+      stateAddPhoto = true;
+    }
+
+    valueManagerString.setNotifierValue('gender',
+        missingProvider.selectMissing.gender ? 'Masculino' : 'Femenino');
+
+    _inputManager.setControllerValue(
+        "full_name", missingProvider.selectMissing.fullName);
+    _inputManager.setControllerValue(
+        "size", missingProvider.selectMissing.size.toString());
+    _inputManager.setControllerValue(
+        "description", missingProvider.selectMissing.description);
+  }
 
   // Manejadores de dropdown
   final valueManagerInt = ValueNotifierManager<int?>();
@@ -40,39 +82,9 @@ class _MissingDetailPageState extends State<MissingDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final missingProvider = Provider.of<MissingProvider>(context);
-    bool stateAddPhoto = false;
     // Vaiores por defecto
     double spaceSize = 30;
     double widthAll = MediaQuery.of(context).size.width;
-
-    DateTime birthDate = missingProvider.selectMissing.birthDate;
-    DateTime missingDate = missingProvider.selectMissing.missingDate;
-
-    if ((birthDate.day != missingDate.day) ||
-        (birthDate.month != missingDate.month) ||
-        (birthDate.year != missingDate.year)) {
-      // Valores por provider de fecha de nacimiento
-      valueManagerInt.setNotifierValue(
-          'date_day_birth', missingProvider.selectMissing.birthDate.day);
-      valueManagerString.setNotifierValue('date_month_birth',
-          monthsDefault[missingProvider.selectMissing.birthDate.month - 1]);
-      valueManagerInt.setNotifierValue(
-          'date_year_birth', missingProvider.selectMissing.birthDate.year);
-
-      // Valores por provider de fecha de ultima ves visto
-      valueManagerInt.setNotifierValue(
-          'date_day_last', missingProvider.selectMissing.missingDate.day);
-      valueManagerString.setNotifierValue('date_month_last',
-          monthsDefault[missingProvider.selectMissing.missingDate.month - 1]);
-      valueManagerInt.setNotifierValue(
-          'date_year_last', missingProvider.selectMissing.missingDate.year);
-      stateAddPhoto = true;
-    }
-
-    // Valor para seleccionar genero por defecto
-    valueManagerString.setNotifierValue('gender',
-        missingProvider.selectMissing.gender ? 'Masculino' : 'Femenino');
 
     return Scaffold(
       appBar: AppBar(
@@ -88,22 +100,24 @@ class _MissingDetailPageState extends State<MissingDetailPage> {
             children: [
               SizedBox(height: spaceSize - 20),
               InputTextDev(
+                color: Colors.black,
                 controller: _inputManager.getController("full_name"),
                 label: "Ingresar su nombre completo",
-                value: missingProvider.selectMissing.fullName,
+                value: _inputManager.getController("full_name").text,
               ),
               SizedBox(height: spaceSize),
               InputTextDev(
+                color: Colors.black,
                 controller: _inputManager.getController("size"),
                 label: "Tamaño aproximado (metros)",
-                value: missingProvider.selectMissing.size.toString(),
+                value: _inputManager.getController("size").text,
                 type: TextInputType.number,
               ),
               SizedBox(height: spaceSize),
               InputDetailDev(
                 controller: _inputManager.getController("description"),
                 label: "Descripción",
-                value: missingProvider.selectMissing.description,
+                value: _inputManager.getController("description").text,
               ),
               SizedBox(height: spaceSize),
               InputDateDev(
@@ -137,7 +151,21 @@ class _MissingDetailPageState extends State<MissingDetailPage> {
                     BtnTextDev(
                       width: (widthAll * 0.5) - 90,
                       text: "Guardar",
-                      onPressed: () {},
+                      onPressed: () async {
+                        if (missingProvider.forCreate) {
+                          await missingProvider.addMissingDetail(
+                            createMissingDetailFromInputs(
+                              valueManagerInt,
+                              valueManagerString,
+                              _inputManager,
+                            ),
+                            context,
+                          );
+                        }
+
+                        // ignore: use_build_context_synchronously
+                        context.pop();
+                      },
                     ),
                     BtnTextDev(
                       width: (widthAll * 0.5) - 90,
@@ -213,6 +241,45 @@ class _MissingDetailPageState extends State<MissingDetailPage> {
           ),
         ],
       ),
+    );
+  }
+
+  MissingDetail createMissingDetailFromInputs(
+    ValueNotifierManager<int?> managerInt,
+    ValueNotifierManager<String?> managerString,
+    InputControllerManager controllerInput,
+  ) {
+    // Aquí obtienes los valores de los TextEditingController
+    final stringValues = managerString.getAllValues();
+    final intValues = managerInt.getAllValues();
+    final inputValues = controllerInput.getAllValues();
+
+    // Crear el objeto MissingDetail
+    return MissingDetail(
+      id: 0, // Asigna un ID según sea necesario
+      birthDate: DateTime(
+        intValues['date_year_birth'] ?? 1,
+        monthsDefault.indexOf(stringValues['date_month_birth'] ?? "Enero"),
+        intValues['date_day_birth'] ?? DateTime.now().year,
+      ),
+      missingDate: DateTime(
+        intValues['date_year_last'] ?? 1,
+        monthsDefault.indexOf(stringValues['date_month_last'] ?? "Enero"),
+        intValues['date_day_last'] ?? DateTime.now().year,
+      ),
+      fullName: inputValues['full_name'] ?? "",
+      size: double.parse(inputValues['size'] ?? "0"),
+      gender: stringValues['gender'] != null
+          ? stringValues['gender'] == 'Masculino'
+              ? true
+              : false
+          : false,
+      description: inputValues['description'] ?? "",
+      lastSeenMap: "",
+      found: false,
+      photosFront: false,
+      photosLeft: false,
+      photosRigth: false,
     );
   }
 }

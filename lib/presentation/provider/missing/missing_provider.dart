@@ -1,5 +1,6 @@
 import 'package:app_missing/domain/entities/missing.dart';
 import 'package:app_missing/infraestructure/datasource/missing_datasource_impl.dart';
+import 'package:app_missing/infraestructure/models/missing/missing_detail_model.dart';
 import 'package:app_missing/infraestructure/repositories/missing_repository_impl.dart';
 import 'package:app_missing/shared/constants/default_value.dart';
 import 'package:app_missing/shared/utils/types.dart';
@@ -41,6 +42,17 @@ class MissingProvider extends ChangeNotifier {
   // Método para actualizar selectMissing
   void setSelectMissing(MissingDetail value) {
     selectMissing = value;
+    notifyListeners();
+  }
+
+  Future<void> addMissingDetail(
+      MissingDetail newValue, BuildContext context) async {
+    // Haciendo peticion
+    final newValueMissing = await missingRepo.createMissing(
+        MissingDetailModel.toModel(newValue), context);
+
+    // Agregar a la lista el nuevo registro
+    _missingDetails.add(newValueMissing);
     notifyListeners();
   }
 

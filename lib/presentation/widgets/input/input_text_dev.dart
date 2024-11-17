@@ -5,6 +5,7 @@ class InputTextDev extends StatelessWidget {
   final TextEditingController controller;
   final String? value;
   final TextInputType type;
+  final Color color;
 
   const InputTextDev({
     super.key,
@@ -12,7 +13,9 @@ class InputTextDev extends StatelessWidget {
     required this.controller,
     this.value,
     this.type = TextInputType.text,
-  });
+    this.color = Colors.blue, 
+  })
+  ;
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +27,9 @@ class InputTextDev extends StatelessWidget {
       ),
       child: TextField(
         controller: controller,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 20,
+              color: color,
         ),
         keyboardType: type,
         cursorColor: const Color.fromRGBO(55, 179, 200, 1),
@@ -33,7 +37,10 @@ class InputTextDev extends StatelessWidget {
           icon: const Icon(Icons.email),
           label: Text(
             label,
-            style: const TextStyle(fontSize: 22),
+            style: const TextStyle(
+              fontSize: 22,
+              color: Colors.blue,
+            ),
           ),
         ),
       ),

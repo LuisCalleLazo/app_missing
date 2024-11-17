@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class InputPassDev extends StatefulWidget {
   final TextEditingController controller;
+  final Color color;
   const InputPassDev({
     super.key,
     required this.controller,
+    this.color = Colors.blue,
   });
 
   @override
@@ -18,6 +20,7 @@ class _InputPassDevState extends State<InputPassDev> {
     setState(() {
       _obscureText = !_obscureText;
     });
+
   }
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,7 @@ class _InputPassDevState extends State<InputPassDev> {
           suffixIcon: IconButton(
             onPressed: _togglePasswordVisibility,
             icon: const Icon(Icons.remove_red_eye_sharp),
-            color: Colors.blue,
+            color: widget.color,
           ),
         ),
       ),

@@ -23,4 +23,13 @@ class MissingDatasourceImpl extends MissingDatasource {
     );
     return response;
   }
+
+  @override
+  Future<Response> createMissing(Map<String, dynamic> missing) async {
+    final response = await _client.post(
+      '/api/v1/missing',
+      data: missing,
+    );
+    return response;
+  }
 }

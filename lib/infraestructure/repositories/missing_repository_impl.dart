@@ -78,4 +78,21 @@ class MissingRepositoryImpl extends MissingRepository {
       throw Exception(e);
     }
   }
+
+  @override
+  Future<MissingDetail> createMissing(
+      MissingDetailModel missing, BuildContext context) async {
+    final errorHandler = ApiErrorHandler(context);
+    try {
+      final response = await dataSource.createMissing(missing.toJson());
+      errorHandler.handleResponse(
+        response: response,
+        showSuccessSnackbar: false,
+      );
+      return MissingDetailModel.fromJson(response.data);
+    } on DioException catch (e) {
+      errorHandler.handleError(error: e);
+      throw Exception(e);
+    }
+  }
 }

@@ -8,7 +8,7 @@ class ValueNotifierManager<T> {
       _notifiers[name] = ValueNotifier<T?>(null);
     }
     return _notifiers[name]!;
-  }
+  } 
 
   /// Asigna un valor a un [ValueNotifier]. Si no existe, lo crea.
   void setNotifierValue(String name, T? value) {
