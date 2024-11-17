@@ -45,6 +45,25 @@ class MissingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> updateMissingDetail(
+      MissingDetail newValue, int missingId, BuildContext context) async {
+    // Haciendo peticion
+    final newValueMissing = await missingRepo.updateMissing(
+        MissingDetailModel.toModel(newValue), missingId, context);
+
+    // Actualizar el registro de la lista
+    int index = _missingDetails.indexWhere((detail) => detail.id == missingId);
+    _missingDetails[index] = newValueMissing;
+    notifyListeners();
+  }
+
+  Future<void> deleteMisssingDetail(int missingId, BuildContext context) async {
+    await missingRepo.deleteMissing(missingId, context);
+    int index = _missingDetails.indexWhere((detail) => detail.id == missingId);
+    _missingDetails.remove(_missingDetails[index]);
+    notifyListeners();
+  }
+
   Future<void> addMissingDetail(
       MissingDetail newValue, BuildContext context) async {
     // Haciendo peticion

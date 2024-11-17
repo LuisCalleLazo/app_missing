@@ -32,4 +32,20 @@ class MissingDatasourceImpl extends MissingDatasource {
     );
     return response;
   }
+
+  @override
+  Future<Response> deleteMissing(int missingId) async {
+    final response = await _client.delete('/api/v1/missing/$missingId');
+    return response;
+  }
+
+  @override
+  Future<Response> updateMissing(
+      Map<String, dynamic> missing, int missingId) async {
+    final response = await _client.put(
+      '/api/v1/missing/$missingId',
+      data: missing,
+    );
+    return response;
+  }
 }

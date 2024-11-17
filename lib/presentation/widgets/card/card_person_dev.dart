@@ -37,7 +37,10 @@ class CardPersonDev extends StatelessWidget {
               content: const Text("Se eliminara todo, incluyendo su busqueda."),
               actions: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    missingProvider.deleteMisssingDetail(data.id, context);
+                    Navigator.of(context).pop(false); 
+                  },
                   child: Text(
                     "Eliminar",
                     style: TextStyle(
@@ -46,9 +49,7 @@ class CardPersonDev extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {
-                    context.pop(); // Cierra el diálogo
-                  },
+                  onPressed: () => Navigator.of(context).pop(false),
                   child: Text(
                     "Cancelar",
                     style: TextStyle(

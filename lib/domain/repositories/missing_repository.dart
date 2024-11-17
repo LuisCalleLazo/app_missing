@@ -9,5 +9,9 @@ abstract class MissingRepository {
   Future<List<MissingDetail>> listMissingDetail(BuildContext context);
   Future<List<File>> getImgsMissing(
       int missingId, MissingPhotosType type, BuildContext context);
-  Future<MissingDetail> createMissing(MissingDetailModel missing, BuildContext context);
+  Future<MissingDetail> createMissing(
+      MissingDetailModel missing, BuildContext context);
+  Future<MissingDetail> updateMissing(
+      MissingDetailModel missing, int missingId, BuildContext context);
+  Future deleteMissing(int missingId, BuildContext context);
 }

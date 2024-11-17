@@ -161,6 +161,16 @@ class _MissingDetailPageState extends State<MissingDetailPage> {
                             ),
                             context,
                           );
+                        } else {
+                          await missingProvider.updateMissingDetail(
+                            createMissingDetailFromInputs(
+                              valueManagerInt,
+                              valueManagerString,
+                              _inputManager,
+                            ),
+                            missingProvider.selectMissing.id,
+                            context,
+                          );
                         }
 
                         // ignore: use_build_context_synchronously
