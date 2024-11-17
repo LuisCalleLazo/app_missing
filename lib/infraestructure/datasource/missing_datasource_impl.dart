@@ -13,8 +13,14 @@ class MissingDatasourceImpl extends MissingDatasource {
   }
 
   @override
-  Future<Response> getZipFilesMissing(int missingId, MissingPhotosType type) async {
-    final response = await _client.get('/api/v1/missing/$missingId/$type');
+  Future<Response> getZipFilesMissing(
+      int missingId, MissingPhotosType type) async {
+    final response = await _client.get(
+      '/api/v1/missing/$missingId/${type.index}',
+      options: Options(
+        responseType: ResponseType.bytes,
+      ),
+    );
     return response;
   }
 }

@@ -33,12 +33,12 @@ class ApiErrorHandler {
     bool showSnackbar = true,
   }) async {
     String errorMessage = "Ocurrió un error inesperado.";
+    print(error.response);
 
     if (error.response != null) {
       switch (error.response!.statusCode) {
         case 400:
-          errorMessage =
-              error.response!.data ?? "Solicitud incorrecta";
+          errorMessage = error.response!.data ?? "Solicitud incorrecta";
           break;
         case 401:
           errorMessage = error.response!.data ?? "No autorizado";
@@ -47,8 +47,7 @@ class ApiErrorHandler {
           errorMessage = "Error en el servidor. Inténtalo de nuevo más tarde.";
           break;
         default:
-          errorMessage =
-              error.response!.data ?? "Error desconocido.";
+          errorMessage = error.response!.data ?? "Error desconocido.";
           break;
       }
     } else {

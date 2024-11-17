@@ -8,18 +8,20 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:app_missing/presentation/provider/auth/auth_provider.dart';
 
-Future main() async{
-  WidgetsFlutterBinding.ensureInitialized(); 
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
-  runApp(MultiProvider(
-    providers: [
-      // Provider<NotificationRepositoryImpl>(create: (_) => NotificationRepositoryImpl()),
-      ChangeNotifierProvider(create: (_) => NotificationProvider()),
-      ChangeNotifierProvider(create: (_) => AuthProvider()),
-      ChangeNotifierProvider(create: (_) => MissingProvider()),
-    ],
-    child: const MyApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        // Provider<NotificationRepositoryImpl>(create: (_) => NotificationRepositoryImpl()),
+        ChangeNotifierProvider(create: (_) => NotificationProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => MissingProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

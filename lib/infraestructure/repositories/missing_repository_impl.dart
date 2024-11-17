@@ -5,11 +5,11 @@ import 'package:app_missing/domain/repositories/missing_repository.dart';
 import 'package:app_missing/infraestructure/datasource/missing_datasource_impl.dart';
 import 'package:app_missing/infraestructure/models/missing/missing_detail_model.dart';
 import 'package:app_missing/presentation/services/api_error_handle.dart';
+import 'package:app_missing/shared/constants/storage_value.dart';
 import 'package:app_missing/shared/utils/types.dart';
 import 'package:archive/archive.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 
 class MissingRepositoryImpl extends MissingRepository {
   final MissingDatasourceImpl dataSource;
@@ -50,8 +50,8 @@ class MissingRepositoryImpl extends MissingRepository {
         showSuccessSnackbar: false,
       );
 
-      final directory = await getTemporaryDirectory();
-      final zipFile = File('${directory.path}/files_missing.zip');
+      final directory = await StorageDirection.getDirPhotosMissing();
+      final zipFile = File('$directory/files_missing.zip');
       await zipFile.writeAsBytes(response.data);
 
       final archive = ZipDecoder().decodeBytes(zipFile.readAsBytesSync());
@@ -64,7 +64,7 @@ class MissingRepositoryImpl extends MissingRepository {
           if (fileName.endsWith('.jpg') ||
               fileName.endsWith('.png') ||
               fileName.endsWith('.jpeg')) {
-            final imagePath = '${directory.path}/$fileName';
+            final imagePath = '$directory/$fileName';
             final imageFile = File(imagePath);
             await imageFile.writeAsBytes(file.content as List<int>);
             imageFiles.add(imageFile);

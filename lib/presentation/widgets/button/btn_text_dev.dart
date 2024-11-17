@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class BtnTextDev extends StatelessWidget {
   final String text;
   final double? width;
+  final double? heigth;
   final double? fontSize;
   final Color color;
   final void Function()? onPressed;
@@ -13,6 +14,7 @@ class BtnTextDev extends StatelessWidget {
     this.width,
     this.fontSize,
     this.color = Colors.blue,
+    this.heigth,
   });
 
   @override
@@ -32,6 +34,7 @@ class BtnTextDev extends StatelessWidget {
         child: Container(
           padding: const EdgeInsetsDirectional.symmetric(vertical: 10),
           width: width ?? 350,
+          height: heigth ?? 55,
           alignment: Alignment.center,
           child: Text(
             text,
