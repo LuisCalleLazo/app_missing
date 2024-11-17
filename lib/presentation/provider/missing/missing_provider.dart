@@ -25,6 +25,12 @@ class MissingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setEmptyList() {
+    _missingDetails = [];
+    _isLoading = true;
+    notifyListeners();
+  }
+
   // Método para actualizar forCreate
   void setForCreate(bool value) {
     forCreate = value;

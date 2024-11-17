@@ -9,6 +9,11 @@ class InputControllerManager {
     }
     return _controllers[name]!;
   }
+  
+  void setControllerValue(String name, String value) {
+    final controller = getController(name);
+    controller.text = value;
+  }
 
   void dispose() {
     for (var controller in _controllers.values) {

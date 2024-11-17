@@ -7,6 +7,7 @@ import 'package:app_missing/presentation/widgets/dropdown/dropdown_field_dev.dar
 import 'package:app_missing/presentation/widgets/input/input_date_dev.dart';
 import 'package:app_missing/presentation/widgets/input/input_detail_dev.dart';
 import 'package:app_missing/presentation/widgets/input/input_text_dev.dart';
+import 'package:app_missing/shared/constants/default_value.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -23,11 +24,11 @@ class MissingDetailPage extends StatefulWidget {
 
 class _MissingDetailPageState extends State<MissingDetailPage> {
   final InputControllerManager _inputManager = InputControllerManager();
-  final ValueNotifier<String?> dropdownGender = ValueNotifier<String?>(null);
-  final ValueNotifierManager<int?> valueManagerInt =
-      ValueNotifierManager<int?>();
-  final ValueNotifierManager<String?> valueManagerString =
-      ValueNotifierManager<String?>();
+
+  // Manejadores de dropdown
+  final valueManagerInt = ValueNotifierManager<int?>();
+  final valueManagerString = ValueNotifierManager<String?>();
+
   bool _isExpanded = false;
 
   void _toggleExpand() {
@@ -38,9 +39,39 @@ class _MissingDetailPageState extends State<MissingDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    double spaceSize = 30;
     final missingProvider = Provider.of<MissingProvider>(context);
+
+    // Vaiores por defecto
+    double spaceSize = 30;
     double widthAll = MediaQuery.of(context).size.width;
+
+    DateTime birthDate = missingProvider.selectMissing.birthDate;
+    DateTime missingDate = missingProvider.selectMissing.missingDate;
+
+    if ((birthDate.day != missingDate.day) ||
+        (birthDate.month != missingDate.month) ||
+        (birthDate.year != missingDate.year)) {
+      // Valores por provider de fecha de nacimiento
+      valueManagerInt.setNotifierValue(
+          'date_day_birth', missingProvider.selectMissing.birthDate.day);
+      valueManagerString.setNotifierValue('date_month_birth',
+          monthsDefault[missingProvider.selectMissing.birthDate.month - 1]);
+      valueManagerInt.setNotifierValue(
+          'date_year_birth', missingProvider.selectMissing.birthDate.year);
+
+      // Valores por provider de fecha de ultima ves visto
+      valueManagerInt.setNotifierValue(
+          'date_day_last', missingProvider.selectMissing.missingDate.day);
+      valueManagerString.setNotifierValue('date_month_last',
+          monthsDefault[missingProvider.selectMissing.missingDate.month - 1]);
+      valueManagerInt.setNotifierValue(
+          'date_year_last', missingProvider.selectMissing.missingDate.year);
+    }
+
+    // Valor para seleccionar genero por defecto
+    valueManagerString.setNotifierValue('gender',
+        missingProvider.selectMissing.gender ? 'Masculino' : 'Femenino');
+
     return Scaffold(
       appBar: AppBar(
         title: Text(missingProvider.selectMissing.fullName),
@@ -70,24 +101,24 @@ class _MissingDetailPageState extends State<MissingDetailPage> {
           SizedBox(height: spaceSize),
           InputDateDev(
             label: "Fecha de nacimiento",
-            dropdownDay: valueManagerInt.getNotifier('firstDropdown'),
-            dropdownMonth: valueManagerString.getNotifier('firstDropdown'),
-            dropdownYear: valueManagerInt.getNotifier('firstDropdown'),
+            dropdownDay: valueManagerInt.getNotifier('date_day_birth'),
+            dropdownMonth: valueManagerString.getNotifier('date_month_birth'),
+            dropdownYear: valueManagerInt.getNotifier('date_year_birth'),
           ),
           SizedBox(height: spaceSize),
           InputDateDev(
             label: "Ultima ves visto",
-            dropdownDay: valueManagerInt.getNotifier('firstDropdown'),
-            dropdownMonth: valueManagerString.getNotifier('firstDropdown'),
-            dropdownYear: valueManagerInt.getNotifier('firstDropdown'),
+            dropdownDay: valueManagerInt.getNotifier('date_day_last'),
+            dropdownMonth: valueManagerString.getNotifier('date_month_last'),
+            dropdownYear: valueManagerInt.getNotifier('date_year_last'),
           ),
           SizedBox(height: spaceSize),
           DropdownFieldDev(
             items: const ["Masculino", "Femenino"],
             text: "Selecciona una opcion",
             width: widthAll * 0.84,
-            label: "Sexo",
-            value: dropdownGender,
+            label: "Genero",
+            value: valueManagerString.getNotifier('gender'),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 60),

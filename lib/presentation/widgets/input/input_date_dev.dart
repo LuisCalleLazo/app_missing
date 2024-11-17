@@ -1,3 +1,4 @@
+import 'package:app_missing/shared/constants/default_value.dart';
 import 'package:flutter/material.dart';
 
 class InputDateDev extends StatefulWidget {
@@ -24,20 +25,6 @@ class _InputDateDevState extends State<InputDateDev> {
 
   // Listas para los valores de días, meses y años
   final List<int> days = List.generate(31, (index) => index + 1);
-  final List<String> months = [
-    'Enero',
-    'Febrero',
-    'Marzo',
-    'Abril',
-    'Mayo',
-    'Junio',
-    'Julio',
-    'Agosto',
-    'Septiembre',
-    'Octubre',
-    'Noviembre',
-    'Diciembre',
-  ];
   final List<int> years =
       List.generate(100, (index) => DateTime.now().year - index);
 
@@ -45,8 +32,12 @@ class _InputDateDevState extends State<InputDateDev> {
   int? selectedDay;
   String? selectedMonth;
   int? selectedYear;
+
   @override
   Widget build(BuildContext context) {
+    selectedDay ??= widget.dropdownDay.value;
+    selectedMonth ??= widget.dropdownMonth.value;
+    selectedYear ??= widget.dropdownYear.value;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Column(
@@ -77,12 +68,10 @@ class _InputDateDevState extends State<InputDateDev> {
                 hint: const Text("Día"),
                 value: selectedDay,
                 onChanged: (value) {
-                  setState(
-                    () {
-                      selectedDay = value;
-                      widget.dropdownDay.value = value;
-                    },
-                  );
+                  setState(() {
+                    selectedDay = value;
+                    widget.dropdownDay.value = value;
+                  });
                 },
                 items: days.map((day) {
                   return DropdownMenuItem<int>(
@@ -98,14 +87,12 @@ class _InputDateDevState extends State<InputDateDev> {
                 hint: const Text("Mes"),
                 value: selectedMonth,
                 onChanged: (value) {
-                  setState(
-                    () {
-                      selectedMonth = value;
-                      widget.dropdownMonth.value = value;
-                    },
-                  );
+                  setState(() {
+                    selectedMonth = value;
+                    widget.dropdownMonth.value = value;
+                  });
                 },
-                items: months.map(
+                items: monthsDefault.map(
                   (month) {
                     return DropdownMenuItem<String>(
                       value: month,
@@ -121,12 +108,10 @@ class _InputDateDevState extends State<InputDateDev> {
                 hint: const Text("Año"),
                 value: selectedYear,
                 onChanged: (value) {
-                  setState(
-                    () {
-                      selectedYear = value;
-                      widget.dropdownYear.value = value;
-                    },
-                  );
+                  setState(() {
+                    selectedYear = value;
+                    widget.dropdownYear.value = value;
+                  });
                 },
                 items: years.map(
                   (year) {

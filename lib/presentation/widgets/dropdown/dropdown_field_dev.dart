@@ -23,8 +23,6 @@ class DropdownFieldDev extends StatefulWidget {
 }
 
 class _DropdownDefultState extends State<DropdownFieldDev> {
-  String? selectedValue;
-  final ValueNotifier<String?> value = ValueNotifier<String?>(null);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,7 +30,7 @@ class _DropdownDefultState extends State<DropdownFieldDev> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 40),
+            padding: const EdgeInsets.only(left: 41),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -59,7 +57,7 @@ class _DropdownDefultState extends State<DropdownFieldDev> {
                   items: widget.items,
                   text: widget.text,
                   width: widget.width,
-                  value: value,
+                  value: widget.value,
                 ),
               ),
             ],

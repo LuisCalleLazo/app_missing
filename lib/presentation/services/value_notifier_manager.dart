@@ -10,6 +10,12 @@ class ValueNotifierManager<T> {
     return _notifiers[name]!;
   }
 
+  /// Asigna un valor a un [ValueNotifier]. Si no existe, lo crea.
+  void setNotifierValue(String name, T? value) {
+    final notifier = getNotifier(name);
+    notifier.value = value;
+  }
+  
   void dispose() {
     for (var notifier in _notifiers.values) {
       notifier.dispose();

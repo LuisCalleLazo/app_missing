@@ -28,3 +28,18 @@ final defaultMissingDetail = MissingDetail(
   photosLeft: false,
   photosRigth: false,
 );
+
+final List<String> monthsDefault = [
+  'Enero',
+  'Febrero',
+  'Marzo',
+  'Abril',
+  'Mayo',
+  'Junio',
+  'Julio',
+  'Agosto',
+  'Septiembre',
+  'Octubre',
+  'Noviembre',
+  'Diciembre',
+];

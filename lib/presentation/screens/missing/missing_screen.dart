@@ -17,7 +17,7 @@ class MissingScreen extends StatefulWidget {
 class _MissingScreenState extends State<MissingScreen> {
   bool _isDataLoaded = false;
 
-  void _loadData() {
+  _loadData() {
     final missingProvider =
         Provider.of<MissingProvider>(context, listen: false);
     if (!_isDataLoaded &&
@@ -48,15 +48,24 @@ class _MissingScreenState extends State<MissingScreen> {
         ),
         body: Consumer<MissingProvider>(
           builder: (context, missingProvider, child) {
-            return missingProvider.isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : ListView.builder(
-                    itemCount: missingProvider.missingDetails.length,
-                    itemBuilder: (context, index) {
-                      final detail = missingProvider.missingDetails[index];
-                      return CardPersonDev(data: detail);
-                    },
-                  );
+            return RefreshIndicator(
+              onRefresh: () async {
+                missingProvider.setEmptyList();
+                setState(() {
+                  _isDataLoaded = false;
+                  _loadData();
+                });
+              },
+              child: missingProvider.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      itemCount: missingProvider.missingDetails.length,
+                      itemBuilder: (context, index) {
+                        final detail = missingProvider.missingDetails[index];
+                        return CardPersonDev(data: detail);
+                      },
+                    ),
+            );
           },
         ),
         floatingActionButton: BtnFloatDev(
