@@ -115,15 +115,31 @@ class MissingRepositoryImpl extends MissingRepository {
   }
 
   @override
-  Future deleteMissing(
-      int missingId, BuildContext context) async {
+  Future<void> deleteMissing(int missingId, BuildContext context) async {
     final errorHandler = ApiErrorHandler(context);
     try {
       final response = await dataSource.deleteMissing(missingId);
       errorHandler.handleResponse(
         response: response,
         showSuccessSnackbar: true,
+      );
+    } on DioException catch (e) {
+      errorHandler.handleError(error: e);
+      throw Exception(e);
+    }
+  }
 
+  @override
+  Future<void> uploadPhotosMissing(FormData photosMissing,
+      MissingPhotosType type, BuildContext context) async {
+    final errorHandler = ApiErrorHandler(context);
+    try {
+      final response =
+          await dataSource.uploadPhotosMissing(photosMissing, type);
+      errorHandler.handleResponse(
+        response: response,
+        showSuccessSnackbar: true,
+        successMessage: "SE SUBIERON LAS IMAGENES CORRECTAMENTE!",
       );
     } on DioException catch (e) {
       errorHandler.handleError(error: e);

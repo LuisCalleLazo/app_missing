@@ -7,12 +7,16 @@ class InputImage extends StatefulWidget {
   final String label;
   final IconData icon;
   final String? initialImageUrl;
+  final List<File>? initialImages;
+  final ValueNotifier<List<File>> notifier;
 
   const InputImage({
     super.key,
     required this.label,
     required this.icon,
     this.initialImageUrl,
+    this.initialImages,
+    required this.notifier,
   });
 
   @override
@@ -20,12 +24,19 @@ class InputImage extends StatefulWidget {
 }
 
 class _InputImageState extends State<InputImage> {
-  final List<File> _selectedImages = [];
+  late List<File> _selectedImages;
+  @override
+  void initState() {
+    _selectedImages = widget.initialImages ?? [];
+    widget.notifier.value = _selectedImages;
+    super.initState();
+  }
+
   final int _maxImages = 5;
 
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
-    final List<XFile>? images = await picker.pickMultiImage();
+    final List<XFile> images = await picker.pickMultiImage();
 
     if (images != null && images.isNotEmpty) {
       setState(() {
@@ -35,6 +46,7 @@ class _InputImageState extends State<InputImage> {
             .take(_maxImages - _selectedImages.length)
             .toList();
         _selectedImages.addAll(newImages);
+        widget.notifier.value = _selectedImages;
       });
     }
   }
@@ -61,6 +73,7 @@ class _InputImageState extends State<InputImage> {
                           onDelete: () {
                             setState(() {
                               _selectedImages.removeAt(index);
+                              widget.notifier.value = _selectedImages;
                             });
                           },
                         ),

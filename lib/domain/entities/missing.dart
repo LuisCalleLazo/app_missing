@@ -8,9 +8,9 @@ class MissingDetail {
   final String description;
   final String lastSeenMap;
   final bool found;
-  final bool photosFront;
-  final bool photosLeft;
-  final bool photosRigth;
+  bool photosFront;
+  bool photosLeft;
+  bool photosRigth;
 
   MissingDetail({
     required this.id,

@@ -4,6 +4,7 @@ import 'package:app_missing/infraestructure/models/missing/missing_detail_model.
 import 'package:app_missing/infraestructure/repositories/missing_repository_impl.dart';
 import 'package:app_missing/shared/constants/default_value.dart';
 import 'package:app_missing/shared/utils/types.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class MissingProvider extends ChangeNotifier {
@@ -81,6 +82,27 @@ class MissingProvider extends ChangeNotifier {
 
   void setTypePhotos(MissingPhotosType type) {
     _typePhotos = type;
+    notifyListeners();
+  }
+
+  Future<void> uploadImagesMissing(FormData data, BuildContext context) async {
+    await missingRepo.uploadPhotosMissing(data, thisType, context);
+    switch (thisType) {
+      case MissingPhotosType.front:
+        selectMissing.photosFront = true;
+        break;
+      case MissingPhotosType.left:
+        selectMissing.photosLeft = true;
+        break;
+      case MissingPhotosType.rigth:
+        selectMissing.photosRigth = true;
+        break;
+      default:
+        selectMissing.photosFront = false;
+        selectMissing.photosLeft = false;
+        selectMissing.photosRigth = false;
+        break;
+    }
     notifyListeners();
   }
 }

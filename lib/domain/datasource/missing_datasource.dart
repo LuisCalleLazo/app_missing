@@ -7,4 +7,5 @@ abstract class MissingDatasource {
   Future<Response> createMissing(Map<String, dynamic> missing);
   Future<Response> deleteMissing(int missingId);
   Future<Response> updateMissing(Map<String, dynamic> missing, int missingId);
+  Future<Response> uploadPhotosMissing(FormData photosMissing, MissingPhotosType type);
 }

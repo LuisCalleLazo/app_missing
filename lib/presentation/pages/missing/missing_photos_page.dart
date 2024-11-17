@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:app_missing/infraestructure/datasource/missing_datasource_impl.dart';
 import 'package:app_missing/infraestructure/repositories/missing_repository_impl.dart';
 import 'package:app_missing/presentation/provider/missing/missing_provider.dart';
+import 'package:app_missing/presentation/services/data_to_formdata.dart';
 import 'package:app_missing/presentation/widgets/button/btn_text_dev.dart';
-import 'package:app_missing/presentation/widgets/card/card_missing_photo.dart';
 import 'package:app_missing/presentation/widgets/input/input_image.dart';
 import 'package:app_missing/shared/utils/enum_to_value.dart';
 import 'package:app_missing/shared/utils/types.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,7 @@ class _MissingPhotosPageState extends State<MissingPhotosPage> {
   List<File> _imageFiles = [];
   bool _isLoading = false;
   String? _error;
+  final ValueNotifier<List<File>> _imageFilesNotifier = ValueNotifier([]);
 
   @override
   void dispose() {
@@ -94,12 +96,6 @@ class _MissingPhotosPageState extends State<MissingPhotosPage> {
     }
   }
 
-  void _deleteImage(int index) {
-    setState(() {
-      _imageFiles.removeAt(index);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final missingProvider =
@@ -125,21 +121,19 @@ class _MissingPhotosPageState extends State<MissingPhotosPage> {
           else if (_doRequest && _imageFiles.isEmpty)
             const Center(child: Text('No images available.'))
           else if (_doRequest)
-            ListView.builder(
-              itemCount: _imageFiles.length,
-              itemBuilder: (context, index) {
-                return CardMissingPhoto(
-                  fileImage: _imageFiles[index],
-                  onDelete: () => _deleteImage(index),
-                );
-              },
+            InputImage(
+              label: "Selecciona imágenes",
+              icon: Icons.abc,
+              initialImages: _imageFiles,
+              notifier: _imageFilesNotifier,
             )
           else
-            const Align(
+            Align(
               alignment: Alignment.center,
               child: InputImage(
                 label: "Selecciona imágenes",
                 icon: Icons.abc,
+                notifier: _imageFilesNotifier,
               ),
             ),
           Padding(
@@ -161,7 +155,26 @@ class _MissingPhotosPageState extends State<MissingPhotosPage> {
             child: Align(
               alignment: Alignment.bottomLeft,
               child: BtnTextDev(
-                onPressed: () {},
+                disable: false,
+                onPressed: () async {
+                  FormData formData = FormData();
+                  formData = await DataToFormdata.addImagesFormData(
+                      formData, _imageFilesNotifier, "Photos");
+
+                  formData.fields.add(
+                    MapEntry(
+                      'MissingId',
+                      missingProvider.selectMissing.id.toString(),
+                    ),
+                  );
+                  if (!mounted) return;
+                  // ignore: use_build_context_synchronously
+                  await missingProvider.uploadImagesMissing(formData, context);
+                  if (!mounted) return;
+                  setState(() {});
+                  // ignore: use_build_context_synchronously
+                  context.pop();
+                },
                 text: "Guardar",
                 width: (widthAll * 0.5) - 90,
               ),

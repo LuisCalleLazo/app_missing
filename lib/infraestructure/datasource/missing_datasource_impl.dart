@@ -48,4 +48,14 @@ class MissingDatasourceImpl extends MissingDatasource {
     );
     return response;
   }
+
+  @override
+  Future<Response> uploadPhotosMissing(
+      FormData photosMissing, MissingPhotosType type) async {
+    final response = await _client.post(
+      '/api/v1/missing/photos/${type.index}',
+      data: photosMissing,
+    );
+    return response;
+  }
 }
