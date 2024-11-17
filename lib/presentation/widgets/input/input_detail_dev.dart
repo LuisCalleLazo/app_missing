@@ -22,7 +22,6 @@ class InputDetailDev extends StatelessWidget {
       child: TextField(
         controller: controller,
         style: const TextStyle(
-          color: Colors.blue,
           fontSize: 16,
         ),
         maxLines: 5,

@@ -28,7 +28,10 @@ class VideoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Videos encontrados"),
+        title: const Text(
+          "Videos encontrados",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         automaticallyImplyLeading: false,
       ),
       body: Column(children: [

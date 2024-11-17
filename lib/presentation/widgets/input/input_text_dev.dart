@@ -25,18 +25,17 @@ class InputTextDev extends StatelessWidget {
       child: TextField(
         controller: controller,
         style: const TextStyle(
-          color: Colors.blue,
           fontSize: 20,
         ),
         keyboardType: type,
         cursorColor: const Color.fromRGBO(55, 179, 200, 1),
         decoration: InputDecoration(
-            icon: const Icon(Icons.email),
-            label: Text(
-              label,
-              style: const TextStyle(fontSize: 22),
-            ),
-            iconColor: Colors.blue),
+          icon: const Icon(Icons.email),
+          label: Text(
+            label,
+            style: const TextStyle(fontSize: 22),
+          ),
+        ),
       ),
     );
   }

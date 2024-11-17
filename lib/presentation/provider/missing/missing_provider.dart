@@ -2,6 +2,7 @@ import 'package:app_missing/domain/entities/missing.dart';
 import 'package:app_missing/infraestructure/datasource/missing_datasource_impl.dart';
 import 'package:app_missing/infraestructure/repositories/missing_repository_impl.dart';
 import 'package:app_missing/shared/constants/default_value.dart';
+import 'package:app_missing/shared/utils/types.dart';
 import 'package:flutter/material.dart';
 
 class MissingProvider extends ChangeNotifier {
@@ -40,6 +41,15 @@ class MissingProvider extends ChangeNotifier {
   // Método para actualizar selectMissing
   void setSelectMissing(MissingDetail value) {
     selectMissing = value;
+    notifyListeners();
+  }
+
+  // Estado de tipo de foto
+  MissingPhotosType _typePhotos = MissingPhotosType.front;
+  MissingPhotosType get thisType => _typePhotos;
+
+  void setTypePhotos(MissingPhotosType type) {
+    _typePhotos = type;
     notifyListeners();
   }
 }

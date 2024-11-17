@@ -43,7 +43,10 @@ class _MissingScreenState extends State<MissingScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Personas desaparecidas"),
+          title: const Text(
+            "Personas desaparecidas",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           automaticallyImplyLeading: false,
         ),
         body: Consumer<MissingProvider>(

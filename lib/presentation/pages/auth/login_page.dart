@@ -26,55 +26,49 @@ class _LoginPageState extends State<LoginPage> {
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(height: 100),
-          const Expanded(
-            child: TextTitleDev(
-              label: "LOGIN",
-              color: Colors.white,
-            ),
+          const TextTitleDev(
+            label: "LOGIN",
+            color: Colors.white,
           ),
           const SizedBox(height: 120),
-          Expanded(
-            child: Column(
-              children: [
-                InputTextDev(
-                  controller: emailController,
-                  label: "Ingresar su nombre o correo",
-                ),
-                const SizedBox(height: 60),
-                InputPassDev(
-                  controller: passwordController,
-                ),
-              ],
-            ),
+          Column(
+            children: [
+              InputTextDev(
+                controller: emailController,
+                label: "Ingresar su nombre o correo",
+              ),
+              const SizedBox(height: 60),
+              InputPassDev(
+                controller: passwordController,
+              ),
+            ],
           ),
-          Expanded(
-            child: Column(
-              children: [
-                const SizedBox(height: 120),
-                // todo: Boton de Login y de register
-                BtnTextDev(
-                  text: "Iniciar Session",
-                  onPressed: () async {
-                    final authContext = Provider.of<AuthProvider>(
-                      context,
-                      listen: false,
-                    );
-                    await authContext.login(
-                      emailController.text,
-                      passwordController.text,
-                      context,
-                    );
-                  },
-                ),
-                const SizedBox(height: 25),
-                BtnTextDev(
-                  text: "Registrarme",
-                  onPressed: () {
-                    context.push('/auth/register');
-                  },
-                ),
-              ],
-            ),
+          Column(
+            children: [
+              const SizedBox(height: 120),
+              // todo: Boton de Login y de register
+              BtnTextDev(
+                text: "Iniciar Session",
+                onPressed: () async {
+                  final authContext = Provider.of<AuthProvider>(
+                    context,
+                    listen: false,
+                  );
+                  await authContext.login(
+                    emailController.text,
+                    passwordController.text,
+                    context,
+                  );
+                },
+              ),
+              const SizedBox(height: 25),
+              BtnTextDev(
+                text: "Registrarme",
+                onPressed: () {
+                  context.push('/auth/register');
+                },
+              ),
+            ],
           ),
         ],
       ),

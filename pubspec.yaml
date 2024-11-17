@@ -45,6 +45,8 @@ dependencies:
   shared_preferences: ^2.3.3
   flutter_secure_storage: ^9.2.2
   visibility_detector: ^0.4.0+2
+  archive: ^3.6.1
+  path_provider: ^2.1.5
 
 dev_dependencies:
   flutter_test:

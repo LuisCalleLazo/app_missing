@@ -23,7 +23,7 @@ final List<GoRoute> missingRoutes = [
   GoRoute(
     path: '$pathBase/photos',
     name: MissingPhotosPage.name,
-    builder: (context, state) => const MissingPhotosPage(),
+    builder: (context, state) => MissingPhotosPage(),
     redirect: (context, state) {
       const storage = FlutterSecureStorage();
       final token = storage.read(key: StorageKey.getCurrentToken());

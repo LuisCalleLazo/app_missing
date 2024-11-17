@@ -11,12 +11,16 @@ class CardPersonDev extends StatelessWidget {
     super.key,
     required this.data,
   });
-
+  static const IconData warning = IconData(0xe6cb, fontFamily: 'MaterialIcons');
   @override
   Widget build(BuildContext context) {
     final missingProvider = Provider.of<MissingProvider>(context);
     final birthDate = data.birthDate;
     final missgDate = data.missingDate;
+
+    // Icons para tarjeta:
+    Icon iconAdvert = const Icon(warning, color: Colors.amber);
+    Icon iconVerified = const Icon(Icons.verified_sharp);
     return InkWell(
       onTap: () {
         missingProvider.setSelectMissing(data);
@@ -33,15 +37,17 @@ class CardPersonDev extends StatelessWidget {
             children: [
               FieldView(
                 fieldName: data.fullName,
-                value: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 30),
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(
-                          'https://indiehoy.com/wp-content/uploads/2018/04/aurora.jpg'),
-                      fit: BoxFit.contain,
-                    ),
-                  ),
+                value: Row(
+                  children: [
+                    const Text("front"),
+                    !data.photosFront ? iconAdvert : iconVerified,
+                    const SizedBox(width: 10),
+                    const Text("left"),
+                    !data.photosLeft ? iconAdvert : iconVerified,
+                    const SizedBox(width: 10),
+                    const Text("rigth"),
+                    !data.photosRigth ? iconAdvert : iconVerified,
+                  ],
                 ),
               ),
               FieldView(
@@ -95,6 +101,7 @@ class FieldView extends StatelessWidget {
   final String fieldName;
   final Widget value;
   const FieldView({
+    super.key,
     required this.fieldName,
     required this.value,
   });

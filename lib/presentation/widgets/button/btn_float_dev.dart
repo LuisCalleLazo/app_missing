@@ -4,11 +4,15 @@ class BtnFloatDev extends StatelessWidget {
   final IconData icon;
   final String text;
   final VoidCallback onPressed;
+  final Color color;
+  final Color? bg;
   const BtnFloatDev({
     super.key,
     required this.icon,
     required this.text,
     required this.onPressed,
+    this.color = Colors.lightBlue,
+    this.bg,
   });
 
   @override
@@ -19,14 +23,16 @@ class BtnFloatDev extends StatelessWidget {
         FloatingActionButton(
           onPressed: onPressed,
           heroTag: text,
+          backgroundColor: bg ?? Theme.of(context).floatingActionButtonTheme.backgroundColor,
           child: Icon(icon),
         ),
         const SizedBox(height: 5),
         Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.bold,
+            color: color,
           ),
           textAlign: TextAlign.center,
         ),
