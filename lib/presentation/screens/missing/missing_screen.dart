@@ -73,7 +73,7 @@ class _MissingScreenState extends State<MissingScreen> {
         ),
         floatingActionButton: BtnFloatDev(
           icon: Icons.add,
-          text: "Agregar persona",
+          text: "",
           onPressed: () {
             missingProvider.setSelectMissing(defaultMissingDetail);
             missingProvider.setForCreate(true);

@@ -26,7 +26,7 @@ class BtnFloatDev extends StatelessWidget {
           backgroundColor: bg ?? Theme.of(context).floatingActionButtonTheme.backgroundColor,
           child: Icon(icon),
         ),
-        const SizedBox(height: 5),
+        SizedBox(height: text == "" ? 0 : 5),
         Text(
           text,
           style: TextStyle(
