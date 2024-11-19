@@ -1,5 +1,8 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
+
 abstract class NotificationDatasource {
-  void connect(String token);
-  void disconnect();
-  
+  Future<void> initializeFirebase();
+  Stream<RemoteMessage> listenToNotifications();
+  Future<void> subscribeToUserNotifications(String token);
+  Future<void> unsubscribeFromUserNotifications(String token);
 }

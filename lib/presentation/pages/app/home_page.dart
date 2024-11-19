@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    int count = NotificationProvider().notificationCount;
+    int count = NotificationProvider().notifications.length;
     return Scaffold(
       backgroundColor: Colors.white,
       body: PageView(

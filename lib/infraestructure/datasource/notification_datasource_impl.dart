@@ -1,34 +1,29 @@
 import 'package:app_missing/domain/datasource/notification_datasource.dart';
-import 'package:web_socket_channel/io.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
-class NotificationDatasourceImpl extends NotificationDatasource
-{
-  IOWebSocketChannel? _channel;
-  
-  NotificationDatasourceImpl();
+class NotificationDatasourceImpl extends NotificationDatasource {
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   @override
-  void connect(String token) {
-    final uri = Uri.parse("ws://192.168.0.9:5000/api/v1/notification/socket?token=$token");
-    _channel = IOWebSocketChannel.connect(uri);
-
-    // Escuchar mensajes
-    _channel!.stream.listen(
-      (message) {
-        
-      },
-      // ignore: avoid_print
-      onDone: () => print("Conexión WebSocket cerrada"),
-      // ignore: avoid_print
-      onError: (error) => print("Error en WebSocket: $error"),
-    );
+  Future<void> initializeFirebase() async {
+    await _firebaseMessaging.requestPermission();
+    String? fcmToken = await _firebaseMessaging.getToken();
+    // print('FCM Token: $fcmToken');
   }
-  
-  // Agrega un getter para acceder al canal desde fuera
-  Stream get stream => _channel!.stream;
 
   @override
-  void disconnect() {
-    _channel?.sink.close();
+  Stream<RemoteMessage> listenToNotifications() {
+    // Escucha notificaciones en tiempo real mientras la app está en primer plano
+    return FirebaseMessaging.onMessage;
+  }
+
+  @override
+  Future<void> subscribeToUserNotifications(String token) async {
+    await _firebaseMessaging.subscribeToTopic("user_$token");
+  }
+
+  @override
+  Future<void> unsubscribeFromUserNotifications(String token) async {
+    await _firebaseMessaging.unsubscribeFromTopic("user_$token");
   }
 }
