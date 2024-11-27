@@ -17,4 +17,6 @@ abstract class MissingRepository {
   Future<void> deleteMissing(int missingId, BuildContext context);
   Future<void> uploadPhotosMissing(
       FormData photosMissing, MissingPhotosType type, BuildContext context);
+
+  Future<List<MissingListSingle>> listMissingSingle(BuildContext context);
 }

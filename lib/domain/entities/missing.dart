@@ -12,18 +12,27 @@ class MissingDetail {
   bool photosLeft;
   bool photosRigth;
 
-  MissingDetail({
+  MissingDetail(
+      {required this.id,
+      required this.birthDate,
+      required this.missingDate,
+      required this.fullName,
+      required this.size,
+      required this.gender,
+      required this.description,
+      required this.lastSeenMap,
+      required this.found,
+      required this.photosFront,
+      required this.photosLeft,
+      required this.photosRigth});
+}
+
+class MissingListSingle {
+  final int id;
+  final String fullName;
+
+  MissingListSingle({
     required this.id,
-    required this.birthDate,
-    required this.missingDate,
     required this.fullName,
-    required this.size,
-    required this.gender,
-    required this.description,
-    required this.lastSeenMap,
-    required this.found,
-    required this.photosFront,
-    required this.photosLeft,
-    required this.photosRigth
   });
 }

@@ -19,14 +19,19 @@ class Navigation extends StatelessWidget {
       unselectedItemColor: Colors.blueGrey,
       selectedItemColor: Colors.blueAccent,
       items: <BottomNavigationBarItem>[
-        const BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Publicaciones',
-          backgroundColor: Color.fromRGBO(255, 255, 255, 1),
-        ),
+        // const BottomNavigationBarItem(
+        //   icon: Icon(Icons.home),
+        //   label: 'Publicaciones',
+        //   backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+        // ),
         const BottomNavigationBarItem(
           icon: Icon(Icons.video_collection_sharp),
           label: 'Video',
+          backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+        ),
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.people_alt_rounded),
+          label: 'Desaparecidos',
           backgroundColor: Color.fromRGBO(255, 255, 255, 1),
         ),
         BottomNavigationBarItem(
@@ -59,11 +64,6 @@ class Navigation extends StatelessWidget {
           ),
           label: 'Notificaciones',
           backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-        ),
-        const BottomNavigationBarItem(
-          icon: Icon(Icons.people_alt_rounded),
-          label: 'Desaparecidos',
-          backgroundColor: Color.fromRGBO(255, 255, 255, 1),
         ),
       ],
       onTap: onItemTapped,

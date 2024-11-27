@@ -58,4 +58,10 @@ class MissingDatasourceImpl extends MissingDatasource {
     );
     return response;
   }
+
+  @override
+  Future<Response> listMissingSingle() async {
+    final response = await _client.get('/api/v1/missing/single');
+    return response;
+  }
 }

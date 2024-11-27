@@ -9,7 +9,15 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final notificationProvider = Provider.of<NotificationProvider>(context);
     return Scaffold(
-      appBar: AppBar(title: const Text('Notificaciones')),
+      appBar: AppBar(
+        title: const Text(
+          'Notificaciones',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        automaticallyImplyLeading: false,
+      ),
       body: ListView.builder(
         itemCount: notificationProvider.notifications.length,
         itemBuilder: (context, index) {

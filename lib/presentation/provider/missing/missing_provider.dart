@@ -13,18 +13,27 @@ class MissingProvider extends ChangeNotifier {
 
   // Estado de lista de personas desaparecidas
   List<MissingDetail> _missingDetails = [];
+  List<MissingListSingle> _missingSingles = [];
   bool _isLoading = true;
+  bool _isLoadingSingle = true;
 
   // Estado de persona seleccionada
   bool forCreate = true;
   MissingDetail selectMissing = defaultMissingDetail;
-
   List<MissingDetail> get missingDetails => _missingDetails;
   bool get isLoading => _isLoading;
+  bool get isLoadingSingle => _isLoadingSingle;
+  List<MissingListSingle> get missingSingles => _missingSingles;
 
   Future<void> listDetail(BuildContext context) async {
     _missingDetails = await missingRepo.listMissingDetail(context);
     _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> listSingle(BuildContext context) async {
+    _missingSingles = await missingRepo.listMissingSingle(context);
+    _isLoadingSingle = false;
     notifyListeners();
   }
 

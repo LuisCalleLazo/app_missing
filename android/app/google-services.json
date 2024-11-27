@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "981372435347",
+    "project_id": "unifranz-32e64",
+    "storage_bucket": "unifranz-32e64.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981372435347:android:1f43e4267b42e1812cc666",
+        "android_client_info": {
+          "package_name": "com.example.app_missing"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHYVByFUdlZhs0Nr4Y25Qjubr0SrlhrTQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,6 @@
 import 'package:app_missing/presentation/provider/missing/notification_provider.dart';
 import 'package:app_missing/presentation/widgets/navigation/navigation.dart';
-import 'package:app_missing/presentation/screens/home/home_screen.dart';
+// import 'package:app_missing/presentation/screens/home/home_screen.dart';
 import 'package:app_missing/presentation/screens/missing/missing_screen.dart';
 import 'package:app_missing/presentation/screens/notification/notification_screen.dart';
 import 'package:app_missing/presentation/screens/video/video_screen.dart';
@@ -18,10 +18,10 @@ class _HomePageState extends State<HomePage> {
   final PageController _pageController = PageController();
   int _selectedIndex = 0;
   final List<Widget> _screens = [
-    const HomeScreen(),
+    // const HomeScreen(),
     const VideoScreen(),
+    const MissingScreen(),
     const NotificationScreen(),
-    const MissingScreen()
   ];
 
   void _onItemTapped(int index) {

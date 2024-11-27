@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class VideoPlayerDev extends StatefulWidget {
-  const VideoPlayerDev({super.key});
+class VideoStreamScreen extends StatefulWidget {
+  const VideoStreamScreen({super.key});
 
   @override
-  _VideoPlayerDevState createState() => _VideoPlayerDevState();
+  _VideoStreamScreenState createState() => _VideoStreamScreenState();
 }
 
-class _VideoPlayerDevState extends State<VideoPlayerDev> {
+class _VideoStreamScreenState extends State<VideoStreamScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 20,
+        horizontal: 10,
+        vertical: 10,
       ),
       child: InkWell(
         onTap: () {

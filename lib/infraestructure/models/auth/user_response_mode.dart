@@ -5,7 +5,6 @@ class UserResponseModel extends UserResponse {
     required super.id,
     required super.name,
     required super.email,
-    // required String photo,
     required super.firstName,
     required super.dadLastName,
     required super.momLastName,

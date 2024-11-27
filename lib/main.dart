@@ -2,6 +2,7 @@ import 'package:app_missing/config/router/app_router.dart';
 import 'package:app_missing/config/theme/app_theme.dart';
 import 'package:app_missing/presentation/provider/missing/missing_provider.dart';
 import 'package:app_missing/presentation/provider/missing/notification_provider.dart';
+import 'package:app_missing/presentation/provider/video/video_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +15,7 @@ Future main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => VideoProvider()),
         ChangeNotifierProvider(create: (_) => NotificationProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => MissingProvider()),
